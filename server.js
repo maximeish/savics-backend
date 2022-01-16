@@ -33,7 +33,7 @@ app.use(
 app.use(cors());
 app.use(helmet());
 app.use(compression());
-app.use("/", (req, res, next) => {
+app.get("/", (req, res, next) => {
   return res
     .status(200)
     .json({ message: "Welcome to Medical Records API. Try /api/1.0/emr/" });
