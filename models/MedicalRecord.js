@@ -28,7 +28,7 @@ let recordSchema = new Schema(
       required: true,
     },
     livingWithDiabetes: {
-      type: Boolean,
+      type: String,
       required: true,
     },
   },
