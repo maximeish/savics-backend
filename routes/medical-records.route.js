@@ -84,12 +84,21 @@ router.route("/delete/:id").delete((req, res, next) => {
     return res.status(400).json({ msg: "Specified id is not valid" });
   }
 
-  recordSchema.findByIdAndRemove(req.params.id, (error, data) => {
-    if (error) {
-      return next(error);
+  recordSchema.findById(req.params.id, (err, record) => {
+    if (err) {
+      return res.json({
+        msg: "Cannot find record with specified id",
+        err: err.message,
+      });
     } else {
-      res.status(200).json({
-        message: `Record with id ${req.params.id} deleted successfully`,
+      record.remove((err, record) => {
+        if (err) {
+          return res.json({ msg: "Failed to delete record", err: err.message });
+        } else {
+          return res.status(200).json({
+            message: `Record with id ${req.params.id} deleted successfully`,
+          });
+        }
       });
     }
   });
