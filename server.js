@@ -38,6 +38,7 @@ app.use("/", (req, res, next) => {
     .status(200)
     .json({ message: "Welcome to Medical Records API. Try /api/1.0/emr/" });
 });
+
 app.use("/api/1.0/emr/", recordsRoute);
 
 // PORT

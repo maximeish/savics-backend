@@ -5,6 +5,10 @@ let mongoose = require("mongoose"),
 // Medical Record Model
 let recordSchema = require("../models/MedicalRecord");
 
+router.route("/").get((req, res) => {
+  return res.status(200).json({ message: "Welcome. Try /create or /list" });
+});
+
 // CREATE Medical Record
 router.route("/create").post((req, res, next) => {
   try {
