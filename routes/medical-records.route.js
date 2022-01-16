@@ -7,32 +7,36 @@ let recordSchema = require("../models/MedicalRecord");
 
 // CREATE Medical Record
 router.route("/create").post((req, res, next) => {
-  let record = new recordSchema({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    gender: req.body.gender,
-    age: req.body.age,
-    country: req.body.country,
-    city: req.body.city,
-    hasDiabetes: req.body.hasDiabetes,
-  });
-  
-  record.save((err, record) => {
-    if (err) {
-      res.json({ msg: "Failed to add record" });
-    } else {
-      res.json({ msg: "Record added successfully", record });
-    }
+  try {
+    let record = new recordSchema({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      gender: req.body.gender,
+      age: req.body.age,
+      country: req.body.country,
+      city: req.body.city,
+      livingWithDiabetes: req.body.livingWithDiabetes,
+    });
+
+    record.save((err, record) => {
+      if (err) return res.json({ msg: "Failed to add record", err });
+      else return res.json({ msg: "Record added successfully", record });
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({ msg: "Failed to add record", error });
+  }
 });
 
 // GET Medical Records
 router.route("/list").get(async (req, res) => {
   await recordSchema.find((err, records) => {
     if (err) {
-      res.json({ msg: "Failed to get records" });
+      return res.json({ msg: "Failed to get records" });
     } else {
-      res.json({ msg: "Records fetched successfully", records });
+      return res.json({ msg: "Records fetched successfully", records });
     }
+  });
 });
 
 // // Get Medical Records
