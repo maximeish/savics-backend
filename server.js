@@ -6,7 +6,7 @@ let dbConfig = require("./database/db");
 const helmet = require("helmet");
 const compression = require("compression");
 
-const recordsRoute = require("../api/routes/medical-records.route");
+const recordsRoute = require("./routes/medical-records.route");
 
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise;
