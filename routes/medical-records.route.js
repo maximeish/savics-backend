@@ -76,16 +76,16 @@ router.route("/list").get((req, res) => {
 // })
 
 // Delete Medical Record
-// router.route('/delete/:id').delete((req, res, next) => {
-//   recordSchema.findByIdAndRemove(req.params.id, (error, data) => {
-//     if (error) {
-//       return next(error)
-//     } else {
-//       res.status(200).json({
-//         msg: data,
-//       })
-//     }
-//   })
-// })
+router.route("/delete/:id").delete((req, res, next) => {
+  recordSchema.findByIdAndRemove(req.params.id, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.status(200).json({
+        message: `Record with id ${req.params.id} deleted successfully`,
+      });
+    }
+  });
+});
 
 module.exports = router;
