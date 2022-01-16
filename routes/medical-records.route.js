@@ -7,25 +7,32 @@ let recordSchema = require("../models/MedicalRecord");
 
 // CREATE Medical Record
 router.route("/create").post((req, res, next) => {
-  recordSchema.create(req.body, (error, data) => {
-    if (error) {
-      return next(error);
-    } else {
-      console.log(data);
-      res.json(data);
-    }
+  let record = new recordSchema({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    gender: req.body.gender,
+    age: req.body.age,
+    country: req.body.country,
+    city: req.body.city,
+    hasDiabetes: req.body.hasDiabetes,
   });
+  
+  record.save((err, record) => {
+    if (err) {
+      res.json({ msg: "Failed to add record" });
+    } else {
+      res.json({ msg: "Record added successfully", record });
+    }
 });
 
 // GET Medical Records
-router.route("/list").get((req, res) => {
-  recordSchema.find((error, data) => {
-    if (error) {
-      return res.json({ error });
+router.route("/list").get(async (req, res) => {
+  await recordSchema.find((err, records) => {
+    if (err) {
+      res.json({ msg: "Failed to get records" });
     } else {
-      res.json(data);
+      res.json({ msg: "Records fetched successfully", records });
     }
-  });
 });
 
 // // Get Medical Records

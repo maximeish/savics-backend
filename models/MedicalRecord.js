@@ -3,14 +3,26 @@ const Schema = mongoose.Schema;
 
 let recordSchema = new Schema(
   {
-    name: {
+    firstName: {
       type: String,
     },
-    email: {
+    lastName: {
       type: String,
     },
-    rollno: {
-      type: Number,
+    gender: {
+      type: String,
+    },
+    age: {
+      type: String,
+    },
+    country: {
+      type: String,
+    },
+    city: {
+      type: String,
+    },
+    hasDiabetes: {
+      type: String,
     },
   },
   {
