@@ -23,20 +23,21 @@ router.route("/create").post((req, res, next) => {
     });
 
     record.save((err, record) => {
-      if (err) return res.json({ msg: "Failed to add record", err });
+      if (err)
+        return res.json({ msg: "Failed to add record", err: err.message });
       else return res.json({ msg: "Record added successfully", record });
     });
   } catch (error) {
     console.log(error);
-    return res.json({ msg: "Failed to add record", error });
+    return res.json({ msg: "Failed to add record", error: error.message });
   }
 });
 
 // GET Medical Records
-router.route("/list").get(async (req, res) => {
-  await recordSchema.find((err, records) => {
+router.route("/list").get((req, res) => {
+  recordSchema.find((err, records) => {
     if (err) {
-      return res.json({ msg: "Failed to get records" });
+      return res.json({ msg: "Failed to get records", err: err.message });
     } else {
       return res.json({ msg: "Records fetched successfully", records });
     }
