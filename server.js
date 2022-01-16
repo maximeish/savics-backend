@@ -34,9 +34,11 @@ app.use(cors());
 app.use(helmet());
 app.use(compression());
 app.use("/", (req, res, next) => {
-  return res.status(200).json({ message: "Welcome to Medical Records API" });
+  return res
+    .status(200)
+    .json({ message: "Welcome to Medical Records API. Try /api/1.0/emr/" });
 });
-app.use("/medical-records", recordsRoute);
+app.use("/api/1.0/emr/", recordsRoute);
 
 // PORT
 const port = process.env.PORT || 4000;

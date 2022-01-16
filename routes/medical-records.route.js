@@ -17,8 +17,8 @@ router.route("/create").post((req, res, next) => {
   });
 });
 
-// READ Medical Records
-router.route("/").get((req, res) => {
+// GET Medical Records
+router.route("/list").get((req, res) => {
   recordSchema.find((error, data) => {
     if (error) {
       return res.json({ error });
@@ -28,16 +28,17 @@ router.route("/").get((req, res) => {
   });
 });
 
-// Get Single Medical Record
-router.route("/edit/:id").get((req, res) => {
-  recordSchema.findById(req.params.id, (error, data) => {
-    if (error) {
-      return res.json({ error });
-    } else {
-      res.json(data);
-    }
-  });
-});
+// // Get Medical Records
+// router.route("/list").get(async (req, res) => {
+//   // get all records
+//   try {
+//     const records = await recordSchema.find();
+//     return res.json(records);
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).json({ error });
+//   }
+// });
 
 // Update Medical Record
 // router.route('/update/:id').put((req, res, next) => {
