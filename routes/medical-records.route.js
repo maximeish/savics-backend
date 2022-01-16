@@ -77,7 +77,10 @@ router.route("/list").get((req, res) => {
 
 // Delete Medical Record
 router.route("/delete/:id").delete((req, res, next) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+  if (
+    req.params.id === undefined ||
+    !mongoose.Types.ObjectId.isValid(req.params.id)
+  ) {
     return res.status(400).json({ msg: "Specified id is not valid" });
   }
 
