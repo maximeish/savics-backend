@@ -44,6 +44,18 @@ router.route("/list").get((req, res) => {
   });
 });
 
+// GET Medical Records
+router.route("/list/minors").get((req, res) => {
+  recordSchema.find((err, records) => {
+    if (err) {
+      return res.json({ msg: "Failed to get records", err: err.message });
+    } else {
+      const minors = records.filter((record) => record.age < 18);
+      return res.json({ msg: "Records fetched successfully", records: minors });
+    }
+  });
+});
+
 // // Get Medical Records
 // router.route("/list").get(async (req, res) => {
 //   // get all records
